@@ -1,0 +1,18 @@
+# Credenciais e segredos (nunca sobem para o Git)
+.env
+
+# Tabela que liga nomes reais aos codigos (Reu_001...). Fica so local.
+data/private/
+
+# Dados brutos e intermediarios (o README explica como obter/gerar)
+data/raw/
+data/interim/
+
+# Logs locais de teste
+*.log
+
+# Ambiente Python
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/

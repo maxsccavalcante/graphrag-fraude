@@ -1,5 +1,5 @@
 @echo off
-REM Passo 1.6 - Publica o projeto no GitHub. Uso: duplo clique.
+REM Publica (ou atualiza) o projeto no GitHub. Uso: duplo clique.
 chcp 65001 >nul
 cd /d "%~dp0"
 
@@ -33,18 +33,21 @@ git status --short
 echo.
 
 (
-echo Fase 1: proposta, modelo LPG e schema do Neo4j
+echo Fases 2 a 4: Text-to-Graph, GraphRAG/KAG, avaliacao e interface
 echo.
-echo - Estudo de caso: Dados Grafos ^(Dados Financeiros ^(Fraudes^)^), dataset DOJ 2009-2018
-echo - Conexao com Neo4j Aura e teste ^(passo 1.4^)
-echo - Schema com constraints e indices B-Tree/RANGE, Fulltext e Vector, validado ^(passo 1.5^)
-echo - README da Fase 1
+echo - Pipeline Text-to-Graph com Gemini: esquema fechado, evidencia verificada,
+echo   resolucao de entidades, anonimizacao, trechos e embeddings ^(fase2.py^)
+echo - Motor GraphRAG/KAG: Text2Cypher somente leitura, busca hibrida com RRF,
+echo   expansao multi-hop, citacoes, confianca e "nao encontrado" ^(graphrag.py^)
+echo - PageRank, Louvain e menor caminho ^(f3_algoritmos.py^)
+echo - Avaliacao GraphRAG x RAG vetorial x LLM sem contexto ^(f3_avaliacao.py^)
+echo - Interface Streamlit ^(app.py^) e README atualizado
 echo.
 echo Co-Authored-By: Claude Opus 5.5 ^<noreply@anthropic.com^>
 echo Claude-Session: https://claude.ai/code/session_012kW3edxJezkZagBzqQ6coT
-) > "%TEMP%\msg_fase1.txt"
-git commit -q -F "%TEMP%\msg_fase1.txt"
-del "%TEMP%\msg_fase1.txt" >nul 2>nul
+) > "%TEMP%\msg_commit.txt"
+git commit -q -F "%TEMP%\msg_commit.txt"
+del "%TEMP%\msg_commit.txt" >nul 2>nul
 
 git remote get-url origin >nul 2>nul
 if errorlevel 1 git remote add origin https://github.com/maxsccavalcante/graphrag-fraude.git
